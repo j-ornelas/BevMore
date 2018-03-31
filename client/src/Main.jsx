@@ -1,13 +1,17 @@
 import React from "react";
 import axios from "axios";
-import helpers from "./helpers.js"
+import helpers from "./helpers.js";
+import NavBar from "./Navbar.jsx";
+import DrinkList from "./DrinkList.jsx";
 
 class Main extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      ingredients: ["Gin", "Orange_Juice", "Grenadine"]
+      ingredients: ["Gin", "Orange_Juice", "Grenadine"],
+      drinks: []
     }
+
   }
 
   componentDidMount(){
@@ -16,10 +20,11 @@ class Main extends React.Component {
 
   getInfo(ingredientsArray){
     let query = helpers.formatQuery(this.state.ingredients);
+    let context = this;
 
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/${query}`)
       .then(function (response) {
-        console.log(response);
+        context.setState({drinks:response.data.drinks})
     })
     .catch(function (error) {
       console.log(error);
@@ -30,7 +35,11 @@ class Main extends React.Component {
 
   render(){
     return (
-      <div><button onClick={this.getInfo.bind(this, this.state.ingredients)}>test</button></div>
+      <div>
+      <NavBar />
+      <DrinkList drinks={this.state.drinks}/>
+      <button onClick={this.getInfo.bind(this, this.state.ingredients)}>test</button>
+      </div>
     )
   }
 }
