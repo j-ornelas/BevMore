@@ -1,1 +1,17 @@
+body {
+  background-color: white;
+}
 
+
+.drink {
+  border: 1px solid lightgrey;
+  background: whitesmoke;
+}
+
+.drinkpicture {
+  display: inline;
+  max-width:230px;
+  max-height:95px;
+  width: auto;
+  height: auto;
+}
