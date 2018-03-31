@@ -8,6 +8,10 @@ body {
   background: whitesmoke;
 }
 
+.drinkname {
+  font-size: 32px;
+}
+
 .drinkpicture {
   display: inline;
   max-width:230px;
