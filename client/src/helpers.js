@@ -1,8 +1,5 @@
 const formatQuery = (strArray) => {
-  //I:array of strings
-  //O: single string in query format
-    //ex: ["Vodka", "Orange_Juice"] === "i=Vodka&i=Orange_Juice&"
-  //E: must work with empty strings (give random) and single entry strings
+  //ex: ["Vodka", "Orange_Juice"] === "i=Vodka&i=Orange_Juice&"
   let queryString = "filter.php?";
   if (!strArray.length){
     return "random.php";
@@ -11,6 +8,19 @@ const formatQuery = (strArray) => {
     queryString += `i=${strArray[i]}&`;
   }
   return queryString;
+};
+
+const formatIngredient = (str) => {
+  //ex: '"oRaNGe jUiCe" -> "Orange_Juice"'
+  function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+  let words = str.split(" ");
+  let final = [];
+  for (var i = 0; i < words.length; i++){
+    final.push(toTitleCase(words[i]));
+  }
+  return final.join("_");
 };
 
 module.exports.formatQuery = formatQuery;
