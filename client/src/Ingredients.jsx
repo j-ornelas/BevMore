@@ -10,11 +10,11 @@ export default function Ingredients (props) {
   return (
     <div>
       <span className="col-md-12">
-        <input onChange={props.handleChange} placeholder="add an ingredient..." value={props.ingToAdd} />
-        <button onClick={props.addIng}>Add to list...</button>
-        <span>Strict Search<input onClick={props.toggleStrict} type="checkbox"></input></span>
+        <input className="ingredient-field input-group mb-3 col-md-5 col-sm-5 col-xs-5" onChange={props.handleChange} placeholder="add an ingredient..." value={props.ingToAdd} />
+        <button className="btn btn-info col-md-5 col-sm-5 col-xs-5"onClick={props.addIng}>Add to list...</button>
+        <span className="col-md-2 col-sm-2 col-xs-2">Strict Search<input onClick={props.toggleStrict} type="checkbox"></input></span>
       </span>
-      <span><ul>{mappedIngredients}</ul></span>
+      <span className="display-ingredients"><br/><ul>{mappedIngredients}</ul></span>
     </div>
   )
 }

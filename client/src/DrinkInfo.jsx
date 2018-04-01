@@ -35,7 +35,7 @@ export default class DrinkInfo extends React.Component{
     return (
       <div className="drink">
       <span><img className="drinkpicture" src={this.props.info.strDrinkThumb} /></span>
-      <span className="drinkname">{this.props.info.strDrink}   <button onClick={this.findIngredients.bind(this)}>see recipe</button></span>
+      <span className="drinkname">{this.props.info.strDrink}   <button type="button" className="btn btn-info btn-sm" onClick={this.findIngredients.bind(this)}>see recipe</button></span>
       <ul className="drinkingredients">{ingredientsList}</ul>
       <span>{this.state.instructions}</span>
       </div>
