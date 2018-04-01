@@ -5,7 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "server:dev": "nodemon ./server/server.js",
+    "server:production": "node ./server/server.js",
     "react:dev": "webpack -d --watch ",
+    "react:production": "webpack -p",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
