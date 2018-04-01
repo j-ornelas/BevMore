@@ -19,3 +19,7 @@ body {
   width: auto;
   height: auto;
 }
+
+.drinkIngredients {
+  display: block;
+}
