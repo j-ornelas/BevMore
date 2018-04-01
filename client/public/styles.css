@@ -4,6 +4,8 @@ body {
 
 
 .drink {
+  margin-top: 10px;
+  margin-bottom: 10px;
   border: 1px solid lightgrey;
   background: whitesmoke;
 }
@@ -14,7 +16,6 @@ body {
 
 .drinkpicture {
   display: inline;
-  max-width:230px;
   max-height:95px;
   width: auto;
   height: auto;
@@ -22,4 +23,15 @@ body {
 
 .drinkIngredients {
   display: block;
+}
+
+.x {
+  color: red;
+  opacity: .3;
+}
+
+.x:hover {
+  color:red;
+  opacity:.8;
+  cursor: pointer;
 }
