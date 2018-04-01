@@ -30,18 +30,44 @@ const reverseFormat = (str) => {
 
 
 const formatIngredients = (obj) => {
+  //the api's formatting is trash. we fix it here.
   let formatted = [];
   for (var i = 0; i < 10; i++){
     if (obj[`strIngredient${i}`]){
-      formatted.push([obj[
-        `strIngredient${i}`],
-        obj[`strMeasure${i}`]]);
+      formatted.push([
+        obj[`strIngredient${i}`],
+        obj[`strMeasure${i}`]
+      ]);
     }
   }
   return formatted;
 };
 
+const passesStrict = function(drink, ingredients){
+  let toCheck = [];
+  let currentIngs = [];
+  let pass = true;
+  //lets make an array of ingredients to check
+  for (let i = 0; i < drink.ingredients.length; i++){
+    toCheck.push(drink.ingredients[i][0].toLowerCase())
+  }
+  //lets make an array of human-readable current ingredients
+  for (let i = 0; i < ingredients.length; i++){
+    currentIngs.push(reverseFormat(ingredients[i]).toLowerCase())
+  }
+  // [guiness stout, root beer, vodka] - [beer, root beer]
+  for (let i = 0; i < toCheck.length; i++){
+    if (currentIngs.includes(toCheck[i])){
+      //cool
+    } else {
+      pass = false;
+    }
+  }
+  return pass;
+}
+
 module.exports.formatQuery = formatQuery;
 module.exports.formatIngredient = formatIngredient;
 module.exports.reverseFormat = reverseFormat;
 module.exports.formatIngredients = formatIngredients;
+module.exports.passesStrict = passesStrict;

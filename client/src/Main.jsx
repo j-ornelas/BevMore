@@ -11,14 +11,39 @@ class Main extends React.Component {
     this.state = {
       query: "",
       ingToAdd: "",
+      strict: false,
       ingredients: [],
+      allDrinks: [],
       drinks: []
     }
 
   }
 
-  componentDidMount(){
+  toggleStrict(){
+    this.setState({strict:!this.state.strict})
+    if (!this.state.strict){
+      this.strictFilter()
+    } else {
+      this.setState({drinks:this.state.allDrinks})
+    }
+  }
 
+  strictFilter(){
+    let allDrinks = this.state.allDrinks;
+    let ingredients = this.state.ingredients;
+    let filteredDrinks = [];
+    for (var i = 0; i < allDrinks.length; i++){
+      if (helpers.passesStrict(allDrinks[i], ingredients)){
+        filteredDrinks.push(allDrinks[i])
+      }
+    }
+    this.setState({drinks:[]})
+    this.setState({drinks:filteredDrinks})
+  }
+
+
+  componentDidMount(){
+    // this.getInfo(this.state.ingredients)
   }
 
   getInfo(ingredientsArray){
@@ -27,19 +52,51 @@ class Main extends React.Component {
     let context = this;
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/${query}`)
       .then(function (response) {
-        context.setState({drinks:response.data.drinks})
+        context.setState({allDrinks:response.data.drinks})
+        if (context.state.strict){
+          context.strictFilter()
+        } else{
+          context.setState({drinks:[]})
+          context.setState({drinks:response.data.drinks})
+        }
+        return context.state.allDrinks
+    })
+    .then(function(next){
+      for (var i = 0; i < next.length; i++){
+        context.getIngredients(next[i])
+      }
     })
     .catch(function (error) {
       console.log(error);
     });
   }
 
-  addIng(str){
+  getIngredients(drink){
+    let context = this;
+    axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drink.idDrink}`)
+      .then(function (response) {
+        drink.ingredients = helpers.formatIngredients(response.data.drinks[0])
+        drink.instructions = response.data.drinks[0].strInstructions
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  removeIng(ingredient, callback){
+    let currIngredients = this.state.ingredients;
+    let newIngredients = [];
+    for (let i = 0; i < currIngredients.length; i++){
+      if (currIngredients[i] !== ingredient){
+        newIngredients.push(currIngredients[i])
+      }
+    }
+    this.setState({ingredients:newIngredients})
+    callback(newIngredients)
 
   }
 
   addIng(){
-    console.log(this.state.ingToAdd)
     let currentIng = this.state.ingredients
     currentIng.push(helpers.formatIngredient(this.state.ingToAdd))
     this.setState({ingredients:currentIng});
@@ -58,8 +115,11 @@ class Main extends React.Component {
         <NavBar />
         <Ingredients
           ingredients={this.state.ingredients}
+          toggleStrict={this.toggleStrict.bind(this)}
           ingToAdd={this.state.ingToAdd}
           addIng={this.addIng.bind(this)}
+          getInfo={this.getInfo.bind(this)}
+          removeIng={this.removeIng.bind(this)}
           handleChange={this.handleChange.bind(this)}
         />
         <DrinkList drinks={this.state.drinks}/>

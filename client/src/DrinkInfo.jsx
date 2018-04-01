@@ -8,7 +8,7 @@ export default class DrinkInfo extends React.Component{
     super(props);
     this.state = {
       info: props.info,
-      drinkIngredients: [],
+      ingredients: [],
       instructions: ""
     }
   }
@@ -19,7 +19,7 @@ export default class DrinkInfo extends React.Component{
     let context = this;
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${query}`)
       .then(function (response) {
-        context.setState({drinkIngredients:helpers.formatIngredients(response.data.drinks[0])})
+        context.setState({ingredients:helpers.formatIngredients(response.data.drinks[0])})
         context.setState({instructions:response.data.drinks[0].strInstructions})
     })
     .catch(function (error) {
@@ -28,14 +28,14 @@ export default class DrinkInfo extends React.Component{
   }
 
   render(){
-    let ingredientsList = this.state.drinkIngredients.map((ingredient) =>
-      <li>{ingredient[0] + " - " + ingredient[1]}</li>
-    )
+      var ingredientsList = this.state.ingredients.map((ingredient, index) =>
+      <li key={index}>{ingredient[0] + " - " + ingredient[1]}</li>
+      )
 
     return (
       <div className="drink">
-      <span><img className="drinkpicture" src={this.state.info.strDrinkThumb} /></span>
-      <span className="drinkname">{this.state.info.strDrink} <button onClick={this.findIngredients.bind(this)}>more info</button></span>
+      <span><img className="drinkpicture" src={this.props.info.strDrinkThumb} /></span>
+      <span className="drinkname">{this.props.info.strDrink}   <button onClick={this.findIngredients.bind(this)}>see recipe</button></span>
       <ul className="drinkingredients">{ingredientsList}</ul>
       <span>{this.state.instructions}</span>
       </div>
