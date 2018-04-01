@@ -23,4 +23,25 @@ const formatIngredient = (str) => {
   return final.join("_");
 };
 
+const reverseFormat = (str) => {
+  //ex: 'Orange_Juice' -> 'Orange Juice'
+  return str.split("_").join(" ")
+};
+
+
+const formatIngredients = (obj) => {
+  let formatted = [];
+  for (var i = 0; i < 10; i++){
+    if (obj[`strIngredient${i}`]){
+      formatted.push([obj[
+        `strIngredient${i}`],
+        obj[`strMeasure${i}`]]);
+    }
+  }
+  return formatted;
+};
+
 module.exports.formatQuery = formatQuery;
+module.exports.formatIngredient = formatIngredient;
+module.exports.reverseFormat = reverseFormat;
+module.exports.formatIngredients = formatIngredients;
