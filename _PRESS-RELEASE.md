@@ -1,28 +1,15 @@
 # BevMore #
 
-## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > An app to find drinks you can make -- with ingredients you already have!
 
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-
-## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-
-## Problem ##
-  > Describe the problem your product solves.
+## The problem ##
+  > You have a collection of drinks in your kitchen, but how do you know what to make with them?
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > BevMore is your personal bartender! Just add what you have, and click 'strict search'!
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > "No longer will you wonder what drinks you can make at home! Try something new! Open your horizons! Impress your friends! Anything is possible!"
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
-
-## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-
-## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Just add the liquors, mixers, or ingredients you have at home. It's really that easy!
